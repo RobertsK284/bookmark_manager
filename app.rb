@@ -18,10 +18,9 @@ end
 
 post '/bookmarks' do
   p "Form data submitted to the /bookmarks route!"
-  Bookmark.add(url: params[:url])
+  Bookmark.add(url: params[:url], title: params[:title])
   redirect '/bookmarks/list'
 end
-
 
   run! if app_file == $0
 end
