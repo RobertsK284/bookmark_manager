@@ -1,7 +1,7 @@
 feature "viewing bookmarks" do
   scenario 'visiting the index page' do
     visit ('/')
-    expect(page).to have_content "Bookmark Manager"
+    expect(page).to have_content "Here is the list of Bookmarks"
   end
 
   scenario 'visiting the Bookmarks list page' do
@@ -10,7 +10,7 @@ feature "viewing bookmarks" do
     Bookmark.add(url: 'http://www.destroyallsoftware.com', title: 'Destroy All Software')
     Bookmark.add(url: 'http://www.google.com', title: 'Google')
 
-    visit ('/bookmarks/list')
+    visit ('/bookmarks')
 
     expect(page).to have_link('Makers Academy', href: 'http://www.makersacademy.com')
     expect(page).to have_link('Destroy All Software', href: 'http://www.destroyallsoftware.com')
