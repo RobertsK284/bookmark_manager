@@ -5,14 +5,13 @@ feature "viewing bookmarks" do
   end
 
   scenario 'visiting the Bookmarks list page' do
-    connection = PG.connect(dbname: 'bookmark_manager_test')
 
-    connection.exec("INSERT INTO bookmarks VALUES (1, 'http://www.makersacademy.com');")
-    connection.exec("INSERT INTO bookmarks VALUES (2, 'http://www.destroyallsoftware.com');")
-    connection.exec("INSERT INTO bookmarks VALUES (3, 'http://www.google.com');")
+    Bookmark.add(url: 'http://www.makersacademy.com')
+    Bookmark.add(url: 'http://www.destroyallsoftware.com')
+    Bookmark.add(url: 'http://www.google.com')
 
-    visit ('/bookmarks')
-    
+    visit ('/bookmarks/list')
+
     expect(page).to have_content "http://www.google.com"
     expect(page).to have_content "http://www.makersacademy.com"
     expect(page).to have_content "http://www.destroyallsoftware.com"

@@ -7,10 +7,19 @@ get '/' do
   erb(:index)
 end
 
-get '/bookmarks' do
-  p ENV
+get '/bookmarks/list' do
   @bookmarks = Bookmark.all
-  erb(:list)
+  erb(:"bookmarks/list")
+end
+
+get '/bookmarks/new' do
+  erb(:"bookmarks/new")
+end
+
+post '/bookmarks' do
+  p "Form data submitted to the /bookmarks route!"
+  Bookmark.add(url: params[:url])
+  redirect '/bookmarks/list'
 end
 
 
