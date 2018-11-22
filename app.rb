@@ -2,6 +2,7 @@ require 'sinatra/base'
 require './lib/Bookmarks.rb'
 
 class Bookmark_Manager < Sinatra::Base
+enable :sessions, :method_override
 
 get '/' do
   redirect '/bookmarks'
@@ -22,5 +23,9 @@ post '/bookmarks' do
   redirect '/bookmarks'
 end
 
+delete '/bookmarks/:id' do
+  Bookmark.delete(id: params[:id])
+  redirect '/bookmarks'
+end
   run! if app_file == $0
 end
