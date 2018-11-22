@@ -22,8 +22,6 @@ describe Bookmark do
 
   describe '.add' do
     it "add url to database" do
-      # connection = PG.connect(dbname: 'bookmark_manager_test')
-
       bookmark = Bookmark.add(url: 'http://www.itv.co.uk', title: 'ITV')
 
       persisted_data = persisted_data(id: bookmark.id)
@@ -32,6 +30,11 @@ describe Bookmark do
       expect(bookmark.id).to eq persisted_data['id']
       expect(bookmark.title).to eq 'ITV'
       expect(bookmark.url).to eq 'http://www.itv.co.uk'
+    end
+
+    it 'does not create a new bookmark if `url is invalid' do
+      Bookmark.add(url: 'not a real bookmark', title: 'not a real bookmark')
+      expect(Bookmark.all).not_to include 'not a real bookmark'
     end
   end
 
